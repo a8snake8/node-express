@@ -1,9 +1,15 @@
 import Vue from 'vue'
 import App from './App.vue'
-import './plugins/ant-design-vue.js'
+import './plugins/element.js'
+import router from './router'
 
 Vue.config.productionTip = false
 
+import http from './axios/http'
+
+Vue.prototype.$http = http
+
 new Vue({
-  render: h => h(App),
+  router,
+  render: h => h(App)
 }).$mount('#app')
