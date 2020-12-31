@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Main from '../views/main/Main.vue'
-import CategoriesCreate from '../views/categories/Create.vue'
-import CategoriesList from '../views/categories/List.vue'
+import Main from '@/views/main/Main.vue'
+import CategoriesCreate from '@/views/categories/Create.vue'
+import CategoriesList from '@/views/categories/List.vue'
 
 Vue.use(VueRouter)
 
