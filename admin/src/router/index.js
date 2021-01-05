@@ -14,12 +14,17 @@ import ItemsList from '@/views/items/List.vue'
 import HeroesCreate from '@/views/heroes/Create.vue'
 import HeroesList from '@/views/heroes/List.vue'
 
+//文章分类
+import ArticalsCreate from '@/views/articals/Create.vue'
+import ArticalsList from '@/views/articals/List.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     component: Main,
+    redirect: '/categories/create',
     children: [{
       path: '/categories/create',
       component: CategoriesCreate,
@@ -46,6 +51,16 @@ const routes = [
     }, {
       path: '/heroes/List',
       component: HeroesList,
+    }, {
+      path: '/articals/create',
+      component: ArticalsCreate,
+    }, {
+      path: '/articals/edite/:id',
+      component: ArticalsCreate,
+      props: true
+    }, {
+      path: '/articals/List',
+      component: ArticalsList,
     }]
   }
 ]

@@ -6,9 +6,9 @@
       </el-table-column>
       <el-table-column prop="name" label="分类名称">
       </el-table-column>
-      <el-table-column prop="avatar" label="预览图">
+      <el-table-column prop="icon" label="预览图">
         <template slot-scope="scope">
-          <img class="icon-pic" :src="scope.row.avatar" alt="pic">
+          <img class="icon-pic" :src="scope.row.icon" alt="pic">
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
@@ -45,12 +45,12 @@ export default {
   methods: {
     // 引入表单
     async initList () {
-      const res = await this.$http.get('rest/hero')
+      const res = await this.$http.get('rest/item')
       this.tableData = res.data
     },
     // 编辑获取单条信息
     handleClick (e) {
-      this.$router.push(`/heroes/edite/${e._id}`)
+      this.$router.push(`/items/edite/${e._id}`)
     },
     // 删除
     deletefn (e) {
@@ -59,7 +59,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$http.delete(`rest/hero/${e._id}`).then(() => {
+        this.$http.delete(`rest/item/${e._id}`).then(() => {
           this.$message({
             type: 'success',
             message: '已删除！'
