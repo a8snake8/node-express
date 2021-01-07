@@ -3,6 +3,7 @@ import App from './App.vue'
 import './plugins/element.js'
 import router from './router'
 import store from './store'
+require('./static/css/common.scss')
 //Vue插件，用于从Vue上下文中使用本地Storage，会话Storage和内存Storage
 import Storage from 'vue-ls'
 import config from '@/defaultSetting'

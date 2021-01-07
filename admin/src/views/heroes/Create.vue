@@ -2,7 +2,7 @@
   <div>
     <Goback v-bind:title="title" />
     <el-form :label-position="labelPosition" label-width="80px" :model="model" @submit.native.prevent="save">
-      <el-tabs type="border-card" value="skill">
+      <el-tabs type="border-card" value="info">
 
         <el-tab-pane label="基础信息" name="info">
           <el-form-item label="英雄名称">

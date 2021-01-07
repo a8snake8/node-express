@@ -1,0 +1,27 @@
+// 图片上传的样式
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  color: #8c939d;
+  min-width: 10rem;
+  height: 10rem;
+  line-height: 10rem;
+  text-align: center;
+}
+.avatar {
+  min-width: 10rem;
+  height: 10rem;
+  display: block;
+}

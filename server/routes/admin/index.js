@@ -15,7 +15,6 @@ module.exports = app => {
   // 查询
   router.get('/', async (req, res) => {
     const queryOptions = {}
-    console.log(req)
     if (req.Model.modelName === 'Category') {
       queryOptions.populate = 'parent'
     }
@@ -52,6 +51,21 @@ module.exports = app => {
     const file = req.file
     file.url = `http://localhost:3000/uploads/${file.filename}`
     res.send(file)
+  })
+
+  // 登录路由
+  app.post('/admin/api/login', async (req, res) => {
+    const { username, password } = req.body
+    // 第一步 根据用户名查找用户
+    const AdminUser = require('../../models/UserInfo')
+    const user = await AdminUser.findOne(username)
+    if (!user) {
+      return res.status(422).send({
+        message: '用户不存在'
+      })
+    }
+    // 第二步 校验密码
+    // 第三步 返回token
   })
 
 }

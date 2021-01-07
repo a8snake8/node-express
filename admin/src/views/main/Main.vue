@@ -1,7 +1,7 @@
 <template>
   <el-container style="height: 100vh; ">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu router :default-active="active">
+      <el-menu router :default-active="active" unique-opened>
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-message"></i>分类管理</template>
           <el-menu-item-group>
@@ -30,16 +30,30 @@
             <el-menu-item index="/articals/list">文章列表</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
+        <el-submenu index="5">
+          <template slot="title"><i class="el-icon-message"></i>广告管理</template>
+          <el-menu-item-group>
+            <el-menu-item index="/ads/create">新增广告</el-menu-item>
+            <el-menu-item index="/ads/list">广告列表</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-submenu index="6">
+          <template slot="title"><i class="el-icon-message"></i>系统管理</template>
+          <el-menu-item-group>
+            <el-menu-item index="/users/create">新增用户</el-menu-item>
+            <el-menu-item index="/users/list">用户列表</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
       </el-menu>
     </el-aside>
 
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
-        <span>王小虎</span>
+        <span>管理员</span>
       </el-header>
 
       <el-main>
-        <router-view></router-view>
+        <router-view :key="$route.fullPath"></router-view>
       </el-main>
     </el-container>
   </el-container>

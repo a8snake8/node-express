@@ -18,9 +18,25 @@ import HeroesList from '@/views/heroes/List.vue'
 import ArticalsCreate from '@/views/articals/Create.vue'
 import ArticalsList from '@/views/articals/List.vue'
 
+//广告分类
+import AdsCreate from '@/views/ads/Create.vue'
+import AdsList from '@/views/ads/List.vue'
+
+//系统管理
+import UsersCreate from '@/views/users/Create.vue'
+import UsersList from '@/views/users/List.vue'
+
+//登录
+import Login from '@/views/Login.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/Login',
+    name: 'login',
+    component: Login,
+  },
   {
     path: '/',
     component: Main,
@@ -61,6 +77,26 @@ const routes = [
     }, {
       path: '/articals/List',
       component: ArticalsList,
+    }, {
+      path: '/ads/create',
+      component: AdsCreate,
+    }, {
+      path: '/ads/edite/:id',
+      component: AdsCreate,
+      props: true
+    }, {
+      path: '/ads/List',
+      component: AdsList,
+    }, {
+      path: '/users/create',
+      component: UsersCreate,
+    }, {
+      path: '/users/edite/:id',
+      component: UsersCreate,
+      props: true
+    }, {
+      path: '/users/List',
+      component: UsersList,
     }]
   }
 ]
