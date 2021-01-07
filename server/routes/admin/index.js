@@ -15,6 +15,7 @@ module.exports = app => {
   // 查询
   router.get('/', async (req, res) => {
     const queryOptions = {}
+    console.log(req)
     if (req.Model.modelName === 'Category') {
       queryOptions.populate = 'parent'
     }

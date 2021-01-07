@@ -7,6 +7,11 @@ import store from './store'
 import Storage from 'vue-ls'
 import config from '@/defaultSetting'
 Vue.use(Storage, config.storageOptions)
+// vue富文本编辑器插件
+import tinymce from 'tinymce'
+import VueTinymce from '@packy-tang/vue-tinymce'
+Vue.prototype.$tinymce = tinymce // 将全局tinymce对象指向给Vue作用域下
+Vue.use(VueTinymce)              // 安装vue的tinymce组件
 
 Vue.config.productionTip = false
 

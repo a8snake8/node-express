@@ -11,7 +11,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="文章内容">
-        <el-input v-model="model.body"></el-input>
+        <editor v-model="model.body"></editor>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
@@ -22,60 +22,56 @@
 
 <script>
 import Goback from '../../components/Goback'
+import editor from '../../components/editor/index'
 export default {
   props: {
     id: {}
   },
   name: '',
   components: {
-    Goback
+    Goback,
+    editor
   },
   data () {
     return {
       title: '物品分类',
       labelPosition: 'left',
-      model: {},
-      typesOptions: [],
+      model: {
+      },
+      typesOptions: []
     };
   },
   created () {
     this.id && this.initEidt()
+    this.initCategory()
   },
   watch: {
-    // 如果路由有变化，会再次执行该方法
-    '$route': function (e) {
-      console.log(e)
-      this.$router.push({
-        path: e.fullPath
-      })
-    }
   },
   methods: {
-    ha () {
-      window.location.reload()
-    },
-    async initEidt () {
-      this.title = '编辑分类'
-      await this.$http.get(`rest/item/${this.id}`).then(el => {
-        this.model = el.data
+    async initCategory () {
+      await this.$http.get('rest/categories').then(el => {
+        this.typesOptions = el.data
       })
     },
-    // 上传成功回调
-    handleSuccess (e) {
-      this.$set(this.model, 'icon', e.url) //用set方法赋值
+    // 获取详情数据
+    async initEidt () {
+      this.title = '编辑分类'
+      await this.$http.get(`rest/artical/${this.id}`).then(el => {
+        this.model = el.data
+      })
     },
     // 新增分类
     async save () {
       if (this.id) {
-        await this.$http.put(`rest/item/${this.id}`, this.model)
+        await this.$http.put(`rest/artical/${this.id}`, this.model)
       } else {
-        await this.$http.post('rest/item', this.model)
+        await this.$http.post('rest/artical', this.model)
       }
       this.$message({
         type: 'success',
         message: this.id ? '修改成功！' : '添加成功！'
       })
-      this.$router.push({ path: '/items/List' })
+      this.$router.push({ path: '/articals/List' })
     }
   },
 };
