@@ -2,6 +2,7 @@ const express = require('express')
 
 const app = express()
 
+app.set('secret', 'asd13a1sd3as4d5131') // 设置token密钥，这里应该放到环境变量中去
 app.use(express.json()) // 中间件
 app.use(require('cors')()) // 跨域
 app.use('/uploads', express.static(__dirname + '/uploads')) // 静态文件托管（可以通过文件夹的路径访问图片）

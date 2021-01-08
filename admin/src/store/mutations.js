@@ -1,1 +1,2 @@
 export const DEFAULT_THEME = 'DEFAULT_THEME'
+export const ACCESS_TOKEN = 'ACCESS_TOKEN'

@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
 export default {
   name: 'login',
   data () {
@@ -39,16 +40,19 @@ export default {
   },
   computed: {
   },
-  watch: {
+  mounted () {
   },
   methods: {
+    ...mapActions(["Login"]),
     submitForm (formName) {
+      const that = this
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$http.post('login', this.loginForm).then((res) => {
-            console.log(res)
+          that.Login(this.loginForm).then(() => {
+            this.$router.push({ path: '/categories/create' })
+          }).catch((err) => {
+            console.log(err)
           })
-          // this.$router.push({ path: '/categories/create' })
         } else {
           return false;
         }

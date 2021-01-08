@@ -18,7 +18,24 @@ Vue.config.productionTip = false
 
 import http from './axios/http'
 
+// 将请求挂载到原型
 Vue.prototype.$http = http
+
+// 设置公共mixin函数
+Vue.mixin({
+  computed: {
+    upload_url () {
+      return this.$http.defaults.baseURL + '/upload'
+    }
+  },
+  methods: {
+    initHeader () {
+      return {
+        'X-Access-Token': `Bearer ${JSON.parse(localStorage.pro__ACCESS_TOKEN).value}`
+      }
+    }
+  }
+})
 
 import { DEFAULT_THEME } from '@/store/mutations'
 

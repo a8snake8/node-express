@@ -6,7 +6,7 @@
         <el-input v-model="model.name"></el-input>
       </el-form-item>
       <el-form-item label="装备图标">
-        <el-upload class="avatar-uploader" :action="$http.defaults.baseURL+'/upload'" :show-file-list="false"
+        <el-upload class="avatar-uploader" :headers="initHeader()" :action="upload_url" :show-file-list="false"
           :on-success="handleSuccess">
           <img v-if="model.icon" :src="model.icon" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>

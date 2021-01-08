@@ -14,7 +14,7 @@
               <el-input v-model="item.title" placeholder="请输入标题名称"></el-input>
             </el-form-item>
             <el-form-item label="图片">
-              <el-upload class="avatar-uploader" :action="$http.defaults.baseURL+'/upload'" :show-file-list="false"
+              <el-upload class="avatar-uploader" :headers="initHeader()" :action="upload_url" :show-file-list="false"
                 :on-success="(res => {$set(item,'image',res.url)})">
                 <img v-if="item.image" :src="item.image" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
