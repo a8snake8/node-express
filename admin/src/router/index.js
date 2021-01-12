@@ -48,6 +48,10 @@ const routes = [
       path: '/categories/List',
       component: CategoriesList,
     }, {
+      path: '/categories/edite/:id',
+      component: CategoriesCreate,
+      props: true
+    }, {
       path: '/items/create',
       component: ItemsCreate,
     }, {

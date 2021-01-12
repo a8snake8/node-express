@@ -6,6 +6,11 @@
       </el-table-column>
       <el-table-column prop="name" label="分类名称">
       </el-table-column>
+      <el-table-column label="英雄类型">
+        <template slot-scope="scope">
+          <el-tag class="space" type="warning" v-for="it in scope.row.roles" :key="it._id">{{it.name}}</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="avatar" label="预览图">
         <template slot-scope="scope">
           <img class="icon-pic" :src="scope.row.avatar" alt="pic">

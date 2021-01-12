@@ -49,7 +49,15 @@
 
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
-        <span>管理员</span>
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            管理员<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>个人信息</el-dropdown-item>
+            <el-dropdown-item>退出</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </el-header>
 
       <el-main>
@@ -75,12 +83,17 @@
 export default {
   data () {
     return {
-      active: this.$route.path
+      active: this.$route.path,
+      visible: false
     }
   },
   watch: {
   },
   mounted () {
+    // token消失重载
+    window.addEventListener('storage', function (e) {
+      if (!e.key) { window.location.reload() }
+    })
   },
   methods: {
   }

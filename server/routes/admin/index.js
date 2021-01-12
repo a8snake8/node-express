@@ -3,6 +3,8 @@ module.exports = app => {
   const express = require('express')
   const jwt = require('jsonwebtoken')
   const AdminUser = require('../../models/Userinfo')
+  require('../../models/Category')
+  require('../../models/Item')
   const assert = require('http-assert')
 
   //下面为整合的公共资源路由
@@ -20,6 +22,9 @@ module.exports = app => {
     const queryOptions = {}
     if (req.Model.modelName === 'Category') {
       queryOptions.populate = 'parent'
+    }
+    if (req.Model.modelName === 'Hero') {
+      queryOptions.populate = ['roles', 'items1', 'items2']
     }
     const items = await req.Model.find().setOptions(queryOptions).limit()
     res.send(items)

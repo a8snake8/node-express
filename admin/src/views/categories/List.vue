@@ -64,10 +64,7 @@ export default {
     },
     // 编辑获取单条信息
     handleClick (e) {
-      this.editeFormVisible = true
-      this.$http.get(`rest/categories/${e._id}`,).then(el => {
-        this.editeForm = el.data
-      })
+      this.$router.push(`/categories/edite/${e._id}`)
     },
     // 删除
     deletefn (e) {

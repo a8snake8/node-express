@@ -21,6 +21,9 @@
 import Goback from '../../components/Goback'
 export default {
   name: '',
+  props: {
+    id: {}
+  },
   components: {
     Goback
   },
@@ -38,8 +41,15 @@ export default {
   },
   mounted () {
     this.initParents()
+    this.id && this.initEidt()
   },
   methods: {
+    async initEidt () {
+      this.title = '编辑分类'
+      await this.$http.get(`rest/categories/${this.id}`).then(el => {
+        this.model = el.data
+      })
+    },
     // 获取分类列表
     async initParents () {
       const res = await this.$http.get('rest/categories')
@@ -47,12 +57,16 @@ export default {
     },
     // 新增分类
     async save () {
-      await this.$http.post('rest/categories', this.model)
-      this.$router.push({ path: '/categories/List' })
+      if (this.id) {
+        await this.$http.put(`rest/categories/${this.id}`, this.model)
+      } else {
+        await this.$http.post('rest/categories', this.model)
+      }
       this.$message({
         type: 'success',
-        message: '添加成功'
+        message: this.id ? '修改成功！' : '添加成功！'
       })
+      this.$router.push({ path: '/categories/List' })
     }
   },
 };

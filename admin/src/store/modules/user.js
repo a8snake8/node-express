@@ -17,7 +17,7 @@ const menu = {
         http.post('login', userinfo).then((response) => {
           if (response.status == '200') {
             const result = response.data
-            Vue.ls.set(ACCESS_TOKEN, result.token, 3 * 60 * 60 * 1000)
+            Vue.ls.set(ACCESS_TOKEN, result.token, 6 * 60 * 60 * 1000)
             commit('SET_TOKEN', result.token)
           } else {
             reject(response)
