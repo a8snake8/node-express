@@ -12,7 +12,7 @@ module.exports = {
   pages: {
     index: {
       entry: 'src/main.js',
-      title: '个人博客',//放要改的title名
+      title: 'LES Attitude',//放要改的title名
     },
   },
   // 具体配置
