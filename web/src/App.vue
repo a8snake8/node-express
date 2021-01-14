@@ -3,23 +3,25 @@
     <a-layout id="components-layout-demo-fixed">
       <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
         <div class="logo" />
-        <a-menu theme="dark" mode="horizontal" :default-selected-keys="['1']" :style="{ lineHeight: '64px' }">
-          <a-menu-item key="1">
+        <a-menu @select="e=>$router.push({path: e.key})" theme="dark" mode="horizontal"
+          :default-selected-keys="[$route.path]" :style="{ lineHeight: '64px' }">
+          <a-menu-item key="/">
             首页
           </a-menu-item>
-          <a-menu-item key="2">
+          <a-menu-item key="/project">
             个人项目
           </a-menu-item>
-          <a-menu-item key="3">
+          <a-menu-item key="/talk">
             留言
           </a-menu-item>
-          <a-menu-item key="4">
+          <a-menu-item key="/person">
             个人介绍
           </a-menu-item>
+          <a-input-search placeholder="文章关键词" style="width: 200px;margin-left:100px;" @search="onSearch" />
         </a-menu>
       </a-layout-header>
       <a-layout-content :style="{ padding: '20px', marginTop: '64px' }">
-        <div :style="{ background: '#fff', padding: '24px', minHeight: '380px' }">
+        <div :style="{ background: '#fff', padding: '20px', minHeight: '380px' }">
           <router-view />
         </div>
       </a-layout-content>
@@ -35,7 +37,11 @@ export default {
   name: 'App',
   components: {
   },
+  mounted () {
+  },
   methods: {
+    onSearch () {
+    },
   }
 }
 </script>
