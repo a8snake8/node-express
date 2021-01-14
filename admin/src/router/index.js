@@ -106,7 +106,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // 如果改为history会引起放入后端后报错404
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })
