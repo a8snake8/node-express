@@ -14,10 +14,10 @@
             <img slot="extra" width="272" alt="logo"
               src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />
             <a-list-item-meta>
-              <a slot="title" :href="item.href">{{ item.title }}</a>
+              <a slot="title" :href="item.href">{{ item.name }}</a>
               <a-avatar slot="avatar" :src="item.avatar" />
             </a-list-item-meta>
-            {{ item.content }}
+            <div class="artical-body" v-html="item.body"></div>
           </a-list-item>
         </a-list>
       </a-col>
@@ -76,21 +76,12 @@
 </template>
 
 <script>
-const listData = [];
-for (let i = 0; i < 23; i++) {
-  listData.push({
-    href: 'https://www.antdv.com/',
-    title: `ant design vue part ${i}`,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    content:
-      'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-  });
-}
+import { getArticalList } from '@/api/common'
 export default {
   name: '',
   data () {
     return {
-      listData,
+      listData: [],
       pagination: {
         onChange: page => {
           console.log(page);
@@ -115,7 +106,19 @@ export default {
   },
   watch: {
   },
+  mounted () {
+    this.initData()
+  },
   methods: {
+    initData () {
+      getArticalList().then(res => {
+        res.data.map(el => {
+          el.body = el.body.replace(/<[^<>]+>/g, "")
+            .replace(/&nbsp;/gi, "")
+        })
+        this.listData = res.data
+      })
+    },
     onPanelChange (value, mode) {
       console.log(value, mode);
     },
@@ -134,6 +137,12 @@ export default {
         padding: 0 30px;
       }
     }
+  }
+  .artical-body {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
   }
 }
 </style>
