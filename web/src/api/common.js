@@ -8,9 +8,9 @@ export function updateBook (obj) {
   })
 }
 
-export function getBookList (obj) {
+export function getArticalList (obj) {
   return request({
-    url: '/catlist',
+    url: '/artical',
     method: 'get',
     params: obj,
   })

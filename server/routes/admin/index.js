@@ -3,8 +3,6 @@ module.exports = app => {
   const express = require('express')
   const jwt = require('jsonwebtoken')
   const AdminUser = require('../../models/Userinfo')
-  require('../../models/Category')
-  require('../../models/Item')
   const assert = require('http-assert')
 
   //下面为整合的公共资源路由

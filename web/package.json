@@ -10,7 +10,7 @@
   "dependencies": {
     "ant-design-vue": "^1.7.2",
     "axios": "^0.21.1",
-    "compression-webpack-plugin": "^7.1.2",
+    "compression-webpack-plugin": "^5.0.0",
     "core-js": "^3.6.5",
     "less-loader": "5.0.0",
     "reset-css": "^5.0.1",

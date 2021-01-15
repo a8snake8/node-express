@@ -1,8 +1,18 @@
 <template>
-  <div>项目</div>
+  <div class="project">
+    <a-card v-for="i in 20" :key="i" hoverable class="card">
+      <img slot="cover" alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+      <a-card-meta title="Europe Street beat">
+        <template slot="description">
+          www.instagram.com
+        </template>
+      </a-card-meta>
+    </a-card>
+  </div>
 </template>
 
 <script>
+import { getArticalList } from '@/api/common'
 export default {
   name: '',
   data () {
@@ -13,9 +23,26 @@ export default {
   },
   watch: {
   },
-  methods: {},
+  mounted () {
+    this.initData()
+  },
+  methods: {
+    initData () {
+      getArticalList().then(res => {
+        console.log(res)
+      })
+    }
+  },
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.project {
+  display: flex;
+  flex-wrap: wrap;
+  .card {
+    width: 20%;
+    margin-bottom: 20px;
+  }
+}
 </style>
