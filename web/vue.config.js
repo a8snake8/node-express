@@ -39,7 +39,7 @@ module.exports = {
     // 生产环境，开启js\css压缩
     if (process.env.NODE_ENV === 'production') {
       config.plugin('compressionPlugin').use(new CompressionPlugin({
-        test: /\.js$|.\css|.\lcss/, // 匹配文件名
+        test: /\.js$|.\css|.\less/, // 匹配文件名
         threshold: 10240, // 对超过10k的数据压缩
         deleteOriginalAssets: false // 不删除源文件
       }))
@@ -52,19 +52,20 @@ module.exports = {
       .loader('file-loader')
       .end()
   },
-  // 用于配置antd less
+  // 自定义主题
   css: {
     loaderOptions: {
       less: {
-        modifyVars: {
-          /* less 变量覆盖，用于自定义 ant design 主题 */
-          'primary-color': '#1890FF',
-          'link-color': '#1890FF',
-          'border-radius-base': '4px'
+        lessOptions: {
+          modifyVars: {
+            'primary-color': '#FC3C2D',
+            'link-color': '#1DA57A',
+            'border-radius-base': '2px',
+          },
+          javascriptEnabled: true,
         },
-        javascriptEnabled: true
-      }
-    }
+      },
+    },
   },
   // 是否在开发环境下通过 eslint-loader 在每次保存时 lint 代码。
   lintOnSave: 'default'

@@ -1,55 +1,12 @@
 <template>
   <div id="app">
     <a-layout id="components-layout-demo-fixed">
-      <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%',padding: '0 20px' }">
-        <a-row type="flex" justify="space-between">
-          <a-col :sm="3" :xs="4">
-            <div class="logo" />
-          </a-col>
-          <a-col :sm="21" :xs="0">
-            <a-menu @select="e=>$router.push({path: e.key})" theme="dark" mode="horizontal"
-              :default-selected-keys="[$route.path]" :style="{ lineHeight: '64px' }">
-              <a-menu-item key="/">
-                首页
-              </a-menu-item>
-              <a-menu-item key="/project">
-                个人项目
-              </a-menu-item>
-              <a-menu-item key="/talk">
-                留言
-              </a-menu-item>
-              <a-menu-item key="/person">
-                个人介绍
-              </a-menu-item>
-            </a-menu>
-          </a-col>
-          <a-col :sm="0" :xs="4">
-            <a-button type="primary" @click="collapsed=true">
-              <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
-            </a-button>
-            <a-drawer placement="left" :closable="false" :visible="collapsed" @close="collapsed = false">
-              <a-menu @select="e=>{$router.push({path: e.key}),collapsed = false}" mode="inline"
-                :default-selected-keys="[$route.path]" :style="{ lineHeight: '64px' }">
-                <a-menu-item key="/">
-                  首页
-                </a-menu-item>
-                <a-menu-item key="/project">
-                  个人项目
-                </a-menu-item>
-                <a-menu-item key="/talk">
-                  留言
-                </a-menu-item>
-                <a-menu-item key="/person">
-                  个人介绍
-                </a-menu-item>
-              </a-menu>
-            </a-drawer>
-          </a-col>
-        </a-row>
+      <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%',padding: '0' }">
+        <Header />
       </a-layout-header>
-      <a-layout-content :style="{ padding: '20px', marginTop: '64px' }">
-        <div :style="{ background: '#fff', padding: '20px', minHeight: '380px' }">
-          <router-view />
+      <a-layout-content class="box" :style="{ marginTop: '64px' }">
+        <div id="contain">
+          <router-view class="animate__animated animate__fadeIn" />
         </div>
       </a-layout-content>
       <a-layout-footer :style="{ textAlign: 'center' }">
@@ -60,13 +17,15 @@
 </template>
 
 <script>
+import Header from '../src/components/menu/Header'
 export default {
   name: 'App',
   components: {
+    Header
   },
   data () {
     return {
-      collapsed: false
+
     }
   },
   competed () {
@@ -80,7 +39,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
 #components-layout-demo-fixed .logo {
   width: 144px;
   height: 48px;
@@ -90,5 +49,21 @@ export default {
 }
 .ant-drawer-body {
   padding: 0 !important;
+}
+.box {
+  background: #076585; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #fff,
+    #076585
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #fff,
+    #076585
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#contain {
+  background: #fff;
 }
 </style>

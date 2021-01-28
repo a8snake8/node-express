@@ -1,148 +1,89 @@
 <template>
   <div class="home">
-    <a-row type="flex" justify="space-around" align="top">
-      <a-col :sm="16" :xs="24">
-        <a-list item-layout="vertical" size="large" :pagination="pagination" :data-source="listData">
-          <div slot="footer"><b>如有侵权</b> 请联系博主删除</div>
-          <a-list-item slot="renderItem" key="item.title" slot-scope="item">
-            <template v-for="{ type, text } in actions" slot="actions">
-              <span :key="type">
-                <a-icon :type="type" style="margin-right: 8px" />
-                {{ text }}
-              </span>
-            </template>
-            <img slot="extra" width="272" alt="logo"
-              src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />
-            <a-list-item-meta>
-              <a slot="title" :href="item.href">{{ item.name }}</a>
-              <a-avatar slot="avatar" :src="item.avatar" />
-            </a-list-item-meta>
-            <div class="artical-body" v-html="item.body"></div>
-          </a-list-item>
-        </a-list>
-      </a-col>
-      <a-col :sm="7" :xs="0">
-        <div class="aside">
-          <a-avatar :size="100" :src="require('@/assets/img/avatar.jpg')" />
-          <h3>Peter Hu</h3>
-          <div class="cat">
-            <a-divider orientation="left">
-              标签
-            </a-divider>
-            <a-tag color="pink">
-              VUE
-            </a-tag>
-            <a-tag color="red">
-              node
-            </a-tag>
-            <a-tag color="orange">
-              笔记
-            </a-tag>
-            <a-tag color="green">
-              日记
-            </a-tag>
-            <a-tag color="cyan">
-              项目
-            </a-tag>
-            <a-tag color="blue">
-              js
-            </a-tag>
-            <a-tag color="purple">
-              随笔
-            </a-tag>
-          </div>
-          <div class="cat">
-            <a-divider orientation="left">
-              文章查找
-            </a-divider>
-            <a-input-search placeholder="输入关键词" style="width: 200px" @search="onPanelChange" />
-            <a-divider />
-            <a-calendar :fullscreen="false" @panelChange="onPanelChange" />
-          </div>
-          <div class="cat">
-            <a-divider orientation="left">
-              文章分类
-            </a-divider>
-            <a-list class="list" :data-source="CategoryData">
-              <a-list-item slot="renderItem" slot-scope="item">
-                {{ item }}
-              </a-list-item>
-            </a-list>
-          </div>
+    <div class="cont1">
+      <div class="img-bg"></div>
+      <div class="main">
+        <h1>大胡子BLOG与各类项目管理中心</h1>
+        <div class="h2">
+          <p>
+            <a-icon type="man" />大胡子
+          </p>
+          <p>
+            <a-icon type="calendar" />2021年1月27日
+          </p>
         </div>
-      </a-col>
-    </a-row>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { getArticalList } from '@/api/common'
 export default {
   name: '',
   data () {
     return {
-      listData: [],
-      pagination: {
-        onChange: page => {
-          console.log(page);
-        },
-        pageSize: 10,
-      },
-      actions: [
-        { type: 'star-o', text: '156' },
-        { type: 'like-o', text: '156' },
-        { type: 'message', text: '2' },
-      ],
-      CategoryData: [
-        'Racing car sprays burning fuel into crowd.',
-        'Japanese princess to wed commoner.',
-        'Australian walks 100km after outback crash.',
-        'Man charged over missing wedding girl.',
-        'Los Angeles battles huge wildfires.',
-      ]
     };
   },
   computed: {
   },
   watch: {
   },
-  mounted () {
-    this.initData()
-  },
-  methods: {
-    initData () {
-      getArticalList().then(res => {
-        res.data.map(el => {
-          el.body = el.body.replace(/<[^<>]+>/g, "")
-            .replace(/&nbsp;/gi, "")
-        })
-        this.listData = res.data
-      })
-    },
-    onPanelChange (value, mode) {
-      console.log(value, mode);
-    },
-  },
+  methods: {},
 };
 </script>
 
 <style lang="less" scoped>
 .home {
-  .aside {
-    background: #efefef;
-    text-align: center;
-    padding: 20px 0;
-    .cat {
-      .list {
-        padding: 0 30px;
+  background: #333333;
+  .cont1 {
+    position: relative;
+    height: 340px;
+    @media (min-width: 768px) {
+      height: 400px;
+    }
+    @media (min-width: 1280px) {
+      height: 690px;
+    }
+    .img-bg {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image: url("../../assets/img/home_bg.jpg");
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      background-size: cover;
+      @media (min-width: 1280px) {
+        filter: blur(10px);
+        -webkit-filter: blur(10px);
+        -moz-filter: blur(10px);
+        -o-filter: blur(10px);
+        -ms-filter: blur(10px);
       }
     }
-  }
-  .artical-body {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
+    .main {
+      width: 50%;
+      border: 1px solid red;
+      position: absolute;
+      top: 100px;
+      left: 25%;
+      h1 {
+        font-size: 2rem;
+        color: #fff;
+        text-align: center;
+      }
+      .h2 {
+        color: #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        p {
+          width: 20%;
+        }
+      }
+    }
   }
 }
 </style>

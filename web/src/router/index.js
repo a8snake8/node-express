@@ -5,6 +5,7 @@ import Vue from 'vue'
 import Home from '@/views/home/Index.vue'
 // 项目
 import Project from '@/views/project/Index.vue'
+import ProjectDetail from '@/views/project/Detail.vue'
 // 留言
 import Talk from '@/views/talk/Index.vue'
 // 个人
@@ -18,6 +19,9 @@ const routes = [{
 }, {
   path: "/project",
   component: Project
+}, {
+  path: "/project/detail",
+  component: ProjectDetail
 }, {
   path: "/talk",
   component: Talk

@@ -8,10 +8,10 @@ export function updateBook (obj) {
   })
 }
 
-export function getArticalList (obj) {
+export function postArticalList (obj) {
   return request({
     url: '/artical',
-    method: 'get',
-    params: obj,
+    method: 'post',
+    data: obj,
   })
 }

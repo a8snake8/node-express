@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import { getArticalList } from '@/api/common'
 export default {
   name: '',
   data () {
@@ -28,9 +27,7 @@ export default {
   },
   methods: {
     initData () {
-      getArticalList().then(res => {
-        console.log(res)
-      })
+
     }
   },
 };
