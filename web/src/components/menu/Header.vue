@@ -45,7 +45,7 @@
         <a-icon class="icon" type="search" @click="sc_collapsed= !sc_collapsed" />
       </a-col>
       <a-col :sm="0" :xs="4">
-        <a-button type="primary" @click="collapsed=true">
+        <a-button type="primary" ghost @click="collapsed=true">
           <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
         </a-button>
         <a-drawer :drawerStyle="{background: '#001529'}" placement="left" :closable="false" :visible="collapsed"
