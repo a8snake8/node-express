@@ -1,4 +1,5 @@
 import request from '../untils/request'
+import qs from 'qs'
 
 export function updateBook (obj) {
   return request({
@@ -13,5 +14,13 @@ export function postArticalList (obj) {
     url: '/artical',
     method: 'post',
     data: obj,
+  })
+}
+
+export function postNewsList (data) {
+  return request({
+    url: 'https://api.apiopen.top/getWangYiNews',
+    method: 'post',
+    data: qs.stringify(data)
   })
 }

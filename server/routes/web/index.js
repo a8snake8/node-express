@@ -27,7 +27,7 @@ module.exports = app => {
       limit: pagesize,
       skip: (currentPage - 1) * pagesize
     }
-    const art = await mongoose.model('Artical').find({ ...mp }).setOptions(queryOptions).lean()
+    const art = await mongoose.model('Artical').find().setOptions(queryOptions).lean()
     res.send(art)
   })
 

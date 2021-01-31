@@ -1,13 +1,27 @@
 <template>
   <div class="project">
-    <a-card v-for="i in 20" :key="i" hoverable class="card">
-      <img slot="cover" alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-      <a-card-meta title="Europe Street beat">
-        <template slot="description">
-          www.instagram.com
-        </template>
-      </a-card-meta>
-    </a-card>
+    <a-row :gutter="40" type="flex" justify="space-between">
+      <a-col class="hl-group-cat2" :xs="24" :lg="6" v-for="i in 16" :key="i">
+        <div style="overflow:hidden;border-radius:4px;">
+          <div class="tp1"></div>
+        </div>
+        <h4>
+          <span @mouseover="(e)=> {e.currentTarget.className = 'animate__animated animate__fadeIn'}"
+            @mouseout="(e)=> {e.currentTarget.className = ''}">消除西瓜项目</span>
+        </h4>
+        <div class="hl-flex">
+          <h5>
+            <a-icon type="github" />
+            <b>Github</b>
+          </h5>
+          <h5>
+            <a-icon type="api" />
+            <span>项目演示</span>
+          </h5>
+        </div>
+      </a-col>
+    </a-row>
+    <a-pagination v-model="current" :total="50" show-less-items />
   </div>
 </template>
 
@@ -16,30 +30,26 @@ export default {
   name: '',
   data () {
     return {
+      current: 1,
     };
   },
   computed: {
   },
   watch: {
   },
-  mounted () {
-    this.initData()
-  },
-  methods: {
-    initData () {
-
-    }
-  },
+  methods: {},
 };
 </script>
 
-<style lang="less" scoped>
+<style scoped lang="less">
 .project {
-  display: flex;
-  flex-wrap: wrap;
-  .card {
-    width: 20%;
-    margin-bottom: 20px;
+  width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  @media (max-width: 768px) {
+    width: 90%;
   }
 }
 </style>

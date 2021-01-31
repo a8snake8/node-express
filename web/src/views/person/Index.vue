@@ -1,5 +1,6 @@
 <template>
-  <div>个人介绍</div>
+  <div class="pers">
+  </div>
 </template>
 
 <script>
@@ -17,5 +18,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.pers {
+}
 </style>

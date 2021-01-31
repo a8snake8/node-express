@@ -50,20 +50,7 @@ export default {
 .ant-drawer-body {
   padding: 0 !important;
 }
-.box {
-  background: #076585; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #fff,
-    #076585
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #fff,
-    #076585
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
 #contain {
-  background: #fff;
+  background: #f0f1f4;
 }
 </style>

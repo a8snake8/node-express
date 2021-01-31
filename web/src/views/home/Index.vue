@@ -60,27 +60,107 @@
     </div>
     <div class="cont3">
       <a-row class="cain" type="flex" justify="space-between">
-        <a-col class="cl1" :xs="18" :lg="17">
+        <a-col class="cl1" :xs="24" :lg="17">
           <div class="art">
-            456123
+            <a-divider orientation="left">
+              今日大事件
+            </a-divider>
+            <div class="sc-list" v-infinite-scroll="handleInfiniteOnLoad" :infinite-scroll-disabled="busy"
+              :infinite-scroll-distance="10">
+              <a-list :data-source="newsList">
+                <a-list-item class="animate__animated animate__fadeInUp" slot="renderItem" slot-scope="item">
+                  <a-list-item-meta :description=" item.passtime">
+                    <a slot="title" :href="item.path" target="_blank">{{ item.title }}</a>
+                    <a-avatar slot="avatar" :src="item.image" />
+                  </a-list-item-meta>
+                  <div>
+                    <img :src="item.image" alt="">
+                  </div>
+                </a-list-item>
+                <div v-if="loading && !busy" class="demo-loading-container">
+                  <a-spin />
+                </div>
+              </a-list>
+            </div>
           </div>
           <div class="art">
             <a-divider orientation="left">
               最新发布
             </a-divider>
+            <a-list item-layout="vertical" size="small" :pagination="pagination" :data-source="listData">
+              <div slot="footer"><b>本人声明：</b> 如遇文章侵权留言可联系博主删除</div>
+              <a-list-item slot="renderItem" key="item._id" slot-scope="item">
+                <template v-for="{ type, text } in actions" slot="actions">
+                  <span :key="type">
+                    <a-icon :type="type" style="margin-right: 8px" />
+                    {{ text }}
+                  </span>
+                </template>
+                <img slot="extra" width="272" alt="logo"
+                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />
+                <a-list-item-meta :description="item.description">
+                  <a slot="title" :href="item.href">{{ item.name }}</a>
+                  <a-avatar slot="avatar" :src="item.avatar" />
+                </a-list-item-meta>
+                {{ item.content }}
+              </a-list-item>
+            </a-list>
           </div>
         </a-col>
-        <a-col ref="categorys" class="cl2" :xs="5" :lg="6">
-          <div class="category">
-            <a-divider orientation="left">
-              分类标签
-            </a-divider>
-          </div>
-          <div class="category">
-            <a-divider orientation="left">
-              文章聚合
-            </a-divider>
-          </div>
+        <a-col class="cl2" :xs="24" :lg="6">
+          <a-affix :offset-top="top">
+            <div class="category">
+              <a-divider orientation="left">
+                分类标签
+              </a-divider>
+              <div class="tag">
+                <a-tag class="bt" color="pink">
+                  pink
+                </a-tag>
+                <a-tag class="bt" color="red">
+                  red
+                </a-tag>
+                <a-tag class="bt" color="orange">
+                  orange
+                </a-tag>
+                <a-tag class="bt" color="green">
+                  green
+                </a-tag>
+                <a-tag class="bt" color="cyan">
+                  cyan
+                </a-tag>
+                <a-tag class="bt" color="blue">
+                  blue
+                </a-tag>
+                <a-tag class="bt" color="purple">
+                  purple
+                </a-tag>
+              </div>
+            </div>
+            <div class="category">
+              <a-divider orientation="left">
+                文章聚合
+              </a-divider>
+              <div class="hl-group-cat1">
+                <div class="inner">
+                  <a-button class="bt" type="primary">分类演示</a-button>
+                  <p>测试文章</p>
+                  <span>
+                    <a-icon type="clock-circle" /> 2021-01-30
+                  </span>
+                </div>
+              </div>
+              <a-list item-layout="horizontal" :data-source="listData">
+                <a-list-item slot="renderItem" slot-scope="item">
+                  <img slot="extra" width="100" alt="logo"
+                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />
+                  <a-list-item-meta description="123456">
+                    <a slot="title" href="https://www.antdv.com/">{{ item.name }}</a>
+                  </a-list-item-meta>
+                </a-list-item>
+              </a-list>
+            </div>
+          </a-affix>
         </a-col>
       </a-row>
     </div>
@@ -88,27 +168,84 @@
 </template>
 
 <script>
+import { postNewsList, postArticalList } from '@/api/common'
+import infiniteScroll from 'vue-infinite-scroll';
 export default {
+  directives: { infiniteScroll },
   name: '',
   data () {
     return {
-      clientHeight: ''
+      listData: [],
+      pagination: {
+        onChange: page => {
+          console.log(page);
+        },
+        pageSize: 10,
+      },
+      actions: [
+        { type: 'star-o', text: '156' },
+        { type: 'like-o', text: '156' },
+        { type: 'message', text: '2' },
+      ],
+      top: 80,
+      newsPage: {
+        page: 1,
+        count: 5
+      },
+      newsList: [],
+      loading: false,
+      busy: false,
     };
   },
   computed: {
 
   },
   watch: {
-    clientHeight (e) {
-      console.log(e)
+  },
+  mounted () {
+    this.initListdata()
+  },
+  beforeMount () {
+    this.fetchData(res => {
+      this.newsList = res.data.result;
+    });
+  },
+  methods: {
+    // 博客文章接口
+    initListdata () {
+      const list = {
+        page: 1,
+        pageSize: 3,
+        name: '',
+        cate: ''
+      }
+      postArticalList(list).then(res => {
+        console.log(res.data)
+        this.listData = res.data
+      })
+    },
+    // 新闻接口
+    fetchData (callback) {
+      postNewsList(this.newsPage).then(res => {
+        callback(res);
+      })
+    },
+    handleInfiniteOnLoad () {
+      const data = this.newsList;
+      this.loading = true;
+      if (data.length > 50) {
+        this.$message.warning('已经到底了');
+        this.busy = true;
+        this.loading = false;
+        return;
+      }
+      this.newsPage.page++
+      this.fetchData(res => {
+        this.newsList = data.concat(res.data.result);
+        this.loading = false;
+      });
     }
   },
-  mounted: {
-    fun () {
-      console.log(this.$refs.categorys)
-    }
-  },
-  methods: {},
 };
 </script>
 
@@ -147,8 +284,8 @@ export default {
     .border {
       position: absolute;
       top: 70px;
-      left: 35%;
-      width: 30%;
+      left: 38%;
+      width: 24%;
       height: 240px;
       border: 12px solid #fc3c2d;
       opacity: 0.6;
@@ -212,7 +349,7 @@ export default {
       }
     }
     .cate {
-      width: 76%;
+      width: 1200px;
       margin: 0 auto;
       @media (max-width: 768px) {
         width: 90%;
@@ -297,7 +434,7 @@ export default {
     background: #f0f1f4;
     padding-top: 40px;
     .card {
-      width: 76%;
+      width: 1200px;
       margin: 0 auto;
       .group {
         display: flex;
@@ -364,23 +501,43 @@ export default {
   .cont3 {
     background: #f0f1f4;
     .cain {
-      width: 76%;
+      width: 1200px;
       margin: 0 auto;
       padding-top: 20px;
+      @media (max-width: 768px) {
+        width: 90%;
+      }
       .cl1 {
         box-sizing: border-box;
         .art {
           background: #fff;
           padding: 12px;
           margin-bottom: 20px;
-          height: 800px;
+          .sc-list {
+            overflow: auto;
+            height: 500px;
+          }
+        }
+        .demo-loading-container {
+          position: absolute;
+          bottom: 40px;
+          width: 100%;
+          text-align: center;
         }
       }
       .cl2 {
         .category {
-          padding: 6px;
+          padding: 12px;
           background: #fff;
           margin-bottom: 20px;
+          .tag {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            .bt {
+              margin-bottom: 10px;
+            }
+          }
         }
       }
     }

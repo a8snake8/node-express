@@ -1,5 +1,8 @@
 @charset "utf-8";
 
+body{
+  background: #f0f1f4;
+}
 ::-webkit-scrollbar  
 {  
     width: 2px;  
@@ -52,4 +55,101 @@
 }
 .hl-blue{
   background: #3d4fb5;
+}
+// 移入特效1
+.hl-group-cat1{
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: url('../img/demo.jpg') no-repeat;
+  background-position: 50% 50%;
+  background: cover;
+  overflow: hidden;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-size: 150%;
+  &:hover{
+    background-size: 160%;
+  }
+  .inner{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.3);
+    color: #efefef;
+    text-align: center;
+    background-attachment:scroll;
+    .bt{
+      margin-top: 60px;
+    }
+    p{
+      margin: 0;
+      line-height: 30px;
+    }
+  }
+}
+// 移入特效2
+.hl-group-cat2{
+  margin-bottom: 20px;
+  .tp1{
+    background: url('../img/demo.jpg') no-repeat;
+    background-size: cover;
+    height: 200px;
+    border-radius: 4px;
+    width: calc(100% + 60px);
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.45s;
+    transition: opacity 0.35s, transform 0.45s;
+    transform: translate3d(-40px, 0, 0);
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.45s;
+  }
+  h4{
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 40px;
+    margin: 0;
+  }
+  h5{
+    b{
+      font-weight: normal;
+      margin-left: 10px;
+    }
+    span{
+      color: #999999;
+      margin-left: 10px;
+    }
+  }
+}
+.hl-group-cat2:hover {
+  .tp1 {
+      filter: alpha(opacity=60);
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+  }
+}
+
+// 日历样式
+.calendarbox{
+  border: 1px solid #eeddee;
+  padding: 20px 0;
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 100%;
+    z-index: -1;
+    filter:
+    alpha(opacity=50); 
+    -moz-opacity:0.50; 
+    opacity:0.50; 
+  }
+  h4{
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 }
